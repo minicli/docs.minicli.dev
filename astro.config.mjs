@@ -6,50 +6,50 @@ const sidebar = [
   {
     label: 'Prologue',
     items: [
-      { label: 'Overview', slug: 'docs' },
-      { label: 'Why miniCLI', slug: 'docs/why-minicli' }
+      { label: 'Overview', slug: 'index' },
+      { label: 'Why miniCLI', slug: 'why-minicli' }
     ]
   },
   {
     label: 'Getting Started',
     items: [
-      { label: 'Installation', slug: 'docs/getting-started' },
-      { label: 'Your First Command', slug: 'docs/first-command' },
+      { label: 'Installation', slug: 'getting-started' },
+      { label: 'Your First Command', slug: 'first-command' },
     ]
   },
   {
     label: 'Architecture Concepts',
     items: [
-      { label: 'Concepts Overview', slug: 'docs/architecture-concepts' },
-      { label: 'Command Model', slug: 'docs/command-model' },
-      { label: 'Arguments and Flags', slug: 'docs/arguments-and-flags' },
-      { label: 'Middleware', slug: 'docs/middleware' },
-      { label: 'Services and Config', slug: 'docs/services-and-config' }
+      { label: 'Concepts Overview', slug: 'architecture-concepts' },
+      { label: 'Command Model', slug: 'command-model' },
+      { label: 'Arguments and Flags', slug: 'arguments-and-flags' },
+      { label: 'Middleware', slug: 'middleware' },
+      { label: 'Services and Config', slug: 'services-and-config' }
     ]
   },
   {
     label: 'Digging Deeper',
     items: [
-      { label: 'Deeper Topics', slug: 'docs/digging-deeper' },
-      { label: 'Components and Output', slug: 'docs/components-and-output' },
-      { label: 'Built-in Commands', slug: 'docs/built-in-commands' }
+      { label: 'Deeper Topics', slug: 'digging-deeper' },
+      { label: 'Components and Output', slug: 'components-and-output' },
+      { label: 'Built-in Commands', slug: 'built-in-commands' }
     ]
   },
   {
     label: 'Reference',
     items: [
-      { label: 'Reference Overview', slug: 'docs/reference' },
-      { label: 'Attributes', slug: 'docs/reference/attributes' },
-      { label: 'Exit Codes', slug: 'docs/reference/exit-codes' },
-      { label: 'Global Flags', slug: 'docs/reference/global-flags' },
-      { label: 'Input Syntax', slug: 'docs/reference/input-syntax' }
+      { label: 'Reference Overview', slug: 'reference' },
+      { label: 'Attributes', slug: 'reference/attributes' },
+      { label: 'Exit Codes', slug: 'reference/exit-codes' },
+      { label: 'Global Flags', slug: 'reference/global-flags' },
+      { label: 'Input Syntax', slug: 'reference/input-syntax' }
     ]
   },
   {
     label: 'Releases',
     items: [
-      { label: 'Versioning Strategy', slug: 'docs/versioning' },
-      { label: '5.x Snapshot', slug: 'docs/v5' }
+      { label: 'Versioning Strategy', slug: 'versioning' },
+      { label: '5.x Snapshot', slug: 'v5' }
     ]
   }
 ];

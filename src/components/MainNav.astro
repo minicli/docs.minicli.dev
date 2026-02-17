@@ -6,7 +6,7 @@ interface Props {
   showCta?: boolean;
 }
 
-const { active = 'home', ctaHref = '/docs/getting-started', ctaLabel = 'Get Started', showCta = true } = Astro.props;
+const { active = 'home', ctaHref = '/getting-started', ctaLabel = 'Get Started', showCta = true } = Astro.props;
 const navLinkBase =
   'rounded-[0.58rem] border border-transparent px-2.5 py-1.5 text-[0.9rem] font-semibold text-[var(--mc-muted)] no-underline transition-colors duration-200 hover:border-[var(--mc-border)] hover:bg-black/5 hover:text-[var(--mc-text)] dark:hover:bg-white/5';
 const navLinkActive = 'border-[var(--mc-border-strong)] bg-black/5 text-[var(--mc-text)] dark:bg-white/5';
@@ -27,9 +27,9 @@ const navLinkActive = 'border-[var(--mc-border-strong)] bg-black/5 text-[var(--m
 
   <nav class="hidden min-[59rem]:inline-flex items-center justify-self-center gap-1">
     <a class:list={[navLinkBase, { [navLinkActive]: active === 'home' }]} href="/">Home</a>
-    <a class:list={[navLinkBase, { [navLinkActive]: active === 'docs' }]} href="/docs">Docs</a>
-    <a class={navLinkBase} href="/docs/getting-started">Quickstart</a>
-    <a class:list={[navLinkBase, 'max-[72rem]:hidden']} href="/docs/versioning">Versions</a>
+    <a class:list={[navLinkBase, { [navLinkActive]: active === 'docs' }]} href="/reference">Docs</a>
+    <a class={navLinkBase} href="/getting-started">Quickstart</a>
+    <a class:list={[navLinkBase, 'max-[72rem]:hidden']} href="/versioning">Versions</a>
     <a class={navLinkBase} href="https://github.com/minicli/minicli" target="_blank" rel="noreferrer">GitHub</a>
   </nav>
 

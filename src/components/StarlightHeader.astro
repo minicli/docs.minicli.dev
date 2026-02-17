@@ -9,7 +9,7 @@ const shouldRenderSearch =
   config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
-<MainNav active="docs" ctaHref="/docs/getting-started" ctaLabel="Start" showCta={true}>
+<MainNav active="docs" ctaHref="/getting-started" ctaLabel="Start" showCta={true}>
   <Fragment slot="tools">
     {shouldRenderSearch && <Search {...Astro.props} />}
     <ThemeSelect {...Astro.props} />

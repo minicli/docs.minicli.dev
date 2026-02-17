@@ -9,17 +9,17 @@ Versioning is how you ship new releases without forcing all readers onto the lat
 
 ## Route model
 
-- Current docs live under `/docs`.
-- Archived docs live under `/docs/v5`, `/docs/v6`, etc.
+- Current docs live under `/`.
+- Archived docs live under `/v5`, `/v6`, etc.
 - Readers can switch major branches by navigating directly to the version path.
 
 ## Release workflow
 
 When releasing a new major version:
 
-1. Snapshot current docs into a versioned folder (for example `/docs/v5`).
+1. Snapshot current docs into a versioned folder (for example `/v5`).
 2. Update navigation/version selector links.
-3. Continue active docs under `/docs`.
+3. Continue active docs under `/`.
 
 ## Suggested checklist
 
@@ -31,11 +31,10 @@ When releasing a new major version:
 
 ```text
 src/content/docs/
-  docs/
+  index.mdx
+  getting-started.mdx
+  v5/
     index.mdx
-    getting-started.mdx
-    v5/
-      index.mdx
 ```
 
 ## Graduation
@@ -44,8 +43,8 @@ At this point you have completed the guided path.
 
 Use the Reference section for day-to-day lookups:
 
-- [Reference Overview](/docs/reference/)
+- [Reference Overview](/reference/)
 
 Need historical context?
 
-- [Browse miniCLI 5.x docs](/docs/v5/)
+- [Browse miniCLI 5.x docs](/v5/)
