@@ -1,0 +1,18 @@
+---
+import config from 'virtual:starlight/user-config';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import MainNav from './MainNav.astro';
+
+const shouldRenderSearch =
+  config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+---
+
+<MainNav active="docs" ctaHref="/docs/getting-started" ctaLabel="Start" showCta={true}>
+  <Fragment slot="tools">
+    {shouldRenderSearch && <Search {...Astro.props} />}
+    <ThemeSelect {...Astro.props} />
+    <LanguageSelect {...Astro.props} />
+  </Fragment>
+</MainNav>

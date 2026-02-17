@@ -1,0 +1,68 @@
+---
+title: Attributes Reference
+description: Quick lookup for miniCLI attributes used throughout the guided lessons.
+sidebar:
+  order: 1
+---
+
+Use this page as a lookup while you work through the guided lessons.
+
+## `#[Command]`
+
+Targets: class, method
+
+Parameters:
+
+- `name: string = ''`
+- `description: string = ''`
+- `default: bool = false`
+
+Used heavily in:
+
+- [Your First Command](/docs/first-command/)
+- [Command Model](/docs/command-model/)
+
+## `#[Argument]`
+
+Targets: method parameter
+
+Parameters:
+
+- `name: string = ''`
+- `description: string = ''`
+
+Used in:
+
+- [Arguments and Flags](/docs/arguments-and-flags/)
+
+## `#[DefaultCommand]`
+
+Targets: method
+
+Marks a method as default subcommand.
+
+## `#[Middleware]`
+
+Targets: class, method
+
+Accepts middleware class list and optional config map.
+
+Used in:
+
+- [Middleware](/docs/middleware/)
+
+## `#[Config]`
+
+Targets: class
+
+Registers a config object key.
+
+## `#[Service]`
+
+Targets: class
+
+Registers a service object key.
+
+Used in:
+
+- [Services and Config](/docs/services-and-config/)

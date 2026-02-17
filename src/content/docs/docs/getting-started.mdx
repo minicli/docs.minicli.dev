@@ -1,0 +1,70 @@
+---
+title: Getting Started
+description: Scaffold your first miniCLI application and verify it works.
+sidebar:
+  order: 2
+---
+
+This lesson gets a fresh miniCLI app running so every next lesson is hands-on.
+
+## Lesson Goal
+
+By the end of this page you will:
+
+- Create a new miniCLI project.
+- Run the command index.
+- Understand the default project layout.
+
+## Requirements
+
+- PHP 8.4+
+- Composer
+
+## Step 1: Create a New App
+
+```bash
+composer create-project --prefer-dist minicli/app myapp
+cd myapp
+```
+
+## Step 2: Verify the CLI boots
+
+```bash
+./minicli help
+```
+
+If this works, your command discovery and runtime are correctly wired.
+
+## Project Structure (Typical)
+
+```text
+app/
+  Commands/
+  Middlewares/
+  Services/
+config/
+  *.php
+minicli
+```
+
+## Why this structure matters
+
+- `app/Commands` is your user-facing command surface.
+- `app/Middlewares` holds cross-cutting behavior.
+- `app/Services` holds shared infrastructure logic.
+- `config` keeps app behavior explicit and reviewable.
+
+## Checkpoint
+
+Before moving on, confirm:
+
+- `./minicli help` runs with no errors.
+- You can identify where your first command class should live.
+
+## Next lesson
+
+Create [Your First Command](/docs/first-command/).
+
+## Explore instead
+
+Prefer a conceptual overview before writing code? Read [Architecture Concepts](/docs/architecture-concepts/).

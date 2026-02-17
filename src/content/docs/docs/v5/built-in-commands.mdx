@@ -1,0 +1,36 @@
+---
+title: Built-in Commands
+description: Commands included by miniCLI out of the box.
+sidebar:
+  order: 8
+---
+
+miniCLI ships with these built-in commands:
+
+## `help`
+
+Lists available commands and subcommands.
+
+```bash
+./minicli help
+```
+
+## `discovery`
+
+Manage discovery cache.
+
+```bash
+./minicli discovery cache
+./minicli discovery clear
+```
+
+## `make`
+
+Generate boilerplate classes.
+
+```bash
+./minicli make command name=create-user
+./minicli make config name=api-client
+./minicli make service name=user-notifier
+./minicli make middleware name=auth-guard
+```

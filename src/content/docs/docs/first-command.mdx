@@ -1,0 +1,65 @@
+---
+title: Your First Command
+description: Build, run, and understand a minimal miniCLI command.
+sidebar:
+  order: 3
+---
+
+Now you will create a command class and run it end to end.
+
+## Lesson Goal
+
+Learn the minimum contract for a working command.
+
+## Create `app/Commands/HelloCommand.php`
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Commands;
+
+use Minicli\Attributes\Command;
+use Minicli\Components\Text;
+use Minicli\Console\ConsoleCommand;
+use Minicli\Console\ExitCode;
+
+#[Command(name: 'hello', description: 'Say hello')]
+final class HelloCommand extends ConsoleCommand
+{
+    public function __invoke(): ExitCode
+    {
+        Text::make('Hello from miniCLI 5.x')->success()->bold()->render();
+
+        return ExitCode::Success;
+    }
+}
+```
+
+## Run it
+
+```bash
+./minicli hello
+```
+
+## What just happened
+
+- `#[Command(...)]` made the class discoverable as a CLI command.
+- Extending `ConsoleCommand` gives access to command runtime context.
+- Returning `ExitCode` makes success/failure explicit and script-friendly.
+
+## Checkpoint
+
+Before moving on, confirm:
+
+- The command appears in `./minicli help`.
+- Running `./minicli hello` prints output and exits successfully.
+
+## Next lesson
+
+Learn how command trees work in [Command Model](/docs/command-model/).
+
+## Explore instead
+
+Need exact attribute syntax while implementing? Open [Attributes Reference](/docs/reference/attributes/).

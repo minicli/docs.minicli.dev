@@ -1,0 +1,42 @@
+---
+title: Getting Started
+description: Create a new miniCLI app and run your first command.
+sidebar:
+  order: 1
+---
+
+## Requirements
+
+- PHP 8.4+
+- Composer
+
+## Create a New App
+
+```bash
+composer create-project --prefer-dist minicli/app myapp
+cd myapp
+```
+
+## Run the App
+
+```bash
+./minicli help
+```
+
+This prints the command list and confirms your installation.
+
+## Project Structure (Typical)
+
+```text
+app/
+  Commands/
+  Middlewares/
+  Services/
+config/
+  *.php
+minicli
+```
+
+## Next Step
+
+Continue with [Your First Command](/docs/v5/first-command/).

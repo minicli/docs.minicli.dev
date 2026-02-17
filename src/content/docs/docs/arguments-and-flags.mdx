@@ -1,0 +1,73 @@
+---
+title: Arguments and Flags
+description: Define command input contracts using typed parameters, argument metadata, and global flags.
+sidebar:
+  order: 5
+---
+
+This lesson turns your command methods into explicit CLI input contracts.
+
+## Lesson Goal
+
+Learn how method signatures map directly to CLI input.
+
+## Typed parameters
+
+miniCLI maps command method parameters to invocation input:
+
+```php
+#[Command(name: 'greet', description: 'Greet by name')]
+public function __invoke(string $name = 'world', bool $shout = false): ExitCode
+{
+    // ...
+}
+```
+
+Run with:
+
+```bash
+./minicli greet name=erika --shout
+```
+
+## Argument metadata
+
+Use `#[Argument]` to improve help output:
+
+```php
+public function __invoke(
+    #[Argument(description: 'Target name')]
+    string $name = 'world'
+): ExitCode {
+    // ...
+}
+```
+
+This makes `--help` output readable for people new to your command.
+
+## Global flags
+
+- `--help` shows command-specific help and argument table.
+- `--quiet` suppresses component output.
+- `--profile` prints execution time and memory stats.
+
+Example:
+
+```bash
+./minicli greet --help
+```
+
+## Common practice
+
+Keep command signatures small. If a command starts taking many parameters, split it into subcommands.
+
+## Checkpoint
+
+Before moving on, confirm:
+
+- You can pass values using `key=value`.
+- You know where argument descriptions come from.
+- You can explain when to use a flag vs parameter.
+
+## Next lesson
+
+Wrap shared behavior around commands with [Middleware](/docs/middleware/).

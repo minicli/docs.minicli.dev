@@ -1,0 +1,57 @@
+---
+title: Built-in Commands
+description: Use miniCLI's built-ins to inspect, scaffold, and optimize your CLI.
+sidebar:
+  order: 9
+---
+
+miniCLI ships with commands that accelerate development and reduce boilerplate.
+
+## Lesson Goal
+
+Know which built-ins to use during daily development.
+
+## `help`
+
+Lists available commands and subcommands.
+
+```bash
+./minicli help
+```
+
+Use this as your first health check when command discovery seems wrong.
+
+## `discovery`
+
+Manage command discovery cache.
+
+```bash
+./minicli discovery cache
+./minicli discovery clear
+```
+
+Use this when you add/remove commands and need to control cache behavior explicitly.
+
+## `make`
+
+Generate boilerplate classes quickly.
+
+```bash
+./minicli make command name=create-user
+./minicli make config name=api-client
+./minicli make service name=user-notifier
+./minicli make middleware name=auth-guard
+```
+
+Use generators to keep naming and folder conventions consistent.
+
+## Checkpoint
+
+Before moving on, confirm:
+
+- You can scaffold a command and run it.
+- You know when to clear or regenerate discovery cache.
+
+## Next lesson
+
+Use [Reference Overview](/docs/reference/) as your lookup toolkit, then finish with [Versioning](/docs/versioning/).

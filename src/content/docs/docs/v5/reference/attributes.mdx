@@ -1,0 +1,49 @@
+---
+title: Attributes Reference
+description: Attribute APIs used in miniCLI 5.x.
+sidebar:
+  order: 1
+---
+
+## `#[Command]`
+
+Targets: class, method
+
+Parameters:
+
+- `name: string = ''`
+- `description: string = ''`
+- `default: bool = false`
+
+## `#[Argument]`
+
+Targets: method parameter
+
+Parameters:
+
+- `name: string = ''`
+- `description: string = ''`
+
+## `#[DefaultCommand]`
+
+Targets: method
+
+Marks a method as default subcommand.
+
+## `#[Middleware]`
+
+Targets: class, method
+
+Accepts middleware class list and optional config map.
+
+## `#[Config]`
+
+Targets: class
+
+Registers a config object key.
+
+## `#[Service]`
+
+Targets: class
+
+Registers a service object key.

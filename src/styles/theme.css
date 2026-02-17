@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --mc-bg: #f6f8fc;
+  --mc-bg-elev: rgba(255, 255, 255, 0.72);
+  --mc-surface: rgba(255, 255, 255, 0.64);
+  --mc-border: rgba(35, 55, 92, 0.13);
+  --mc-border-strong: rgba(35, 55, 92, 0.2);
+  --mc-text: #172033;
+  --mc-muted: #56607a;
+  --mc-shadow: 0 14px 40px rgba(20, 33, 63, 0.08);
+
+  --mc-input: #7d6cff;
+  --mc-output: #ff5f9f;
+  --mc-config: #34b06f;
+
+  --sl-font: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+  --sl-font-system: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+  --sl-font-mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+
+  --sl-color-accent-low: #ece9ff;
+  --sl-color-accent: #7462ff;
+  --sl-color-accent-high: #4334ad;
+  --sl-color-text-accent: #4e3fbe;
+
+  --sl-color-white: #172033;
+  --sl-color-gray-1: #27314d;
+  --sl-color-gray-2: #49516a;
+  --sl-color-gray-3: #626d8a;
+  --sl-color-gray-4: #8e98b4;
+  --sl-color-gray-5: #cbd3e5;
+  --sl-color-gray-6: #e9edf6;
+  --sl-color-black: #ffffff;
+
+  --sl-color-bg: var(--mc-bg);
+  --sl-color-bg-nav: color-mix(in srgb, #ffffff 74%, #eef2fb 26%);
+  --sl-color-bg-sidebar: color-mix(in srgb, #ffffff 66%, #eef2fb 34%);
+
+  --sl-color-hairline: rgba(45, 63, 104, 0.12);
+  --sl-color-hairline-light: rgba(76, 96, 139, 0.16);
+  --sl-color-hairline-shade: rgba(45, 63, 104, 0.14);
+  --sl-color-backdrop-overlay: rgba(238, 243, 255, 0.66);
+
+  --sl-nav-height: 4.1rem;
+  --sl-nav-pad-x: 1rem;
+}
+
+:root[data-theme='dark'] {
+  --mc-bg: #0c111e;
+  --mc-bg-elev: rgba(16, 23, 42, 0.82);
+  --mc-surface: rgba(19, 27, 50, 0.74);
+  --mc-border: rgba(160, 183, 240, 0.18);
+  --mc-border-strong: rgba(170, 196, 255, 0.28);
+  --mc-text: #f4f7ff;
+  --mc-muted: #a5b4d8;
+  --mc-shadow: 0 18px 48px rgba(2, 6, 18, 0.5);
+
+  --sl-color-accent-low: #1f2148;
+  --sl-color-accent: #9f96ff;
+  --sl-color-accent-high: #d1cbff;
+  --sl-color-text-accent: #b4abff;
+
+  --sl-color-white: #f6f8ff;
+  --sl-color-gray-1: #dbe5ff;
+  --sl-color-gray-2: #b7c6ea;
+  --sl-color-gray-3: #9baacf;
+  --sl-color-gray-4: #7484ac;
+  --sl-color-gray-5: #38496d;
+  --sl-color-gray-6: #1c2641;
+  --sl-color-black: #0f172d;
+
+  --sl-color-bg: var(--mc-bg);
+  --sl-color-bg-nav: rgba(13, 19, 35, 0.88);
+  --sl-color-bg-sidebar: rgba(13, 19, 35, 0.94);
+  --sl-color-hairline: rgba(170, 196, 255, 0.14);
+  --sl-color-hairline-light: rgba(170, 196, 255, 0.2);
+  --sl-color-hairline-shade: rgba(170, 196, 255, 0.18);
+  --sl-color-backdrop-overlay: rgba(6, 10, 19, 0.56);
+}
+
+html,
+body {
+  background:
+    radial-gradient(900px 340px at 50% -5%, rgba(125, 108, 255, 0.08), transparent 60%),
+    radial-gradient(720px 280px at 12% 0%, rgba(255, 95, 159, 0.06), transparent 62%),
+    radial-gradient(740px 320px at 88% 0%, rgba(52, 176, 111, 0.07), transparent 65%),
+    var(--mc-bg);
+  color: var(--mc-text);
+}
+
+body {
+  font-family: var(--sl-font);
+}
+
+a {
+  text-underline-offset: 0.16em;
+}
+
+.header {
+  backdrop-filter: blur(12px);
+  background: var(--sl-color-bg-nav);
+  border-bottom: 1px solid var(--mc-border);
+}
+
+.sidebar-pane,
+.right-sidebar-panel,
+.pagination-links a,
+.sl-link-card,
+.sl-markdown-content pre,
+.sl-markdown-content table {
+  backdrop-filter: blur(10px);
+}
+
+.sidebar-pane {
+  background: var(--sl-color-bg-sidebar);
+}
+
+.sl-markdown-content pre {
+  border: 0;
+  border-radius: 0.9rem;
+  box-shadow: none;
+}
+
+.sl-markdown-content code {
+  border-radius: 0.45rem;
+}
+
+.sl-markdown-content :is(h1, h2, h3) {
+  letter-spacing: -0.02em;
+}
+
+.sl-markdown-content h2 {
+  margin-top: 2rem;
+}
+
+.mc-nav-tools :global(button[data-open-modal]),
+.mc-nav-tools :global(.theme-select),
+.mc-nav-tools :global(.language-select) {
+  border-radius: 0.62rem;
+  border: 1px solid var(--mc-border);
+  background: color-mix(in srgb, var(--mc-bg-elev) 86%, transparent);
+}
+
+.mc-nav-tools :global(button[data-open-modal]) {
+  color: var(--mc-muted);
+  height: 2.2rem;
+}
+
+.mc-nav-tools :global(button[data-open-modal]:hover) {
+  border-color: var(--mc-border-strong);
+  color: var(--mc-text);
+}
+
+@media (max-width: 50rem) {
+  .mc-nav-tools :global(site-search) {
+    display: none;
+  }
+}

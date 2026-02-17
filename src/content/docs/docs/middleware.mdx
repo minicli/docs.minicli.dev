@@ -1,0 +1,62 @@
+---
+title: Middleware
+description: Add reusable behavior around command execution.
+sidebar:
+  order: 6
+---
+
+Middleware lets you implement shared command behavior once and apply it consistently.
+
+## Lesson Goal
+
+Understand where middleware belongs and how it controls execution flow.
+
+## Apply middleware
+
+Apply middleware at class or method level with `#[Middleware]`:
+
+```php
+#[Middleware([AuditMiddleware::class])]
+#[Command(name: 'sync', description: 'Sync resources')]
+final class SyncCommand extends ConsoleCommand
+{
+    public function __invoke(): ExitCode
+    {
+        return ExitCode::Success;
+    }
+}
+```
+
+Middleware classes must implement `Minicli\Contracts\MiddlewareInterface`.
+
+## Configured middleware
+
+You can pass per-middleware config:
+
+```php
+#[Middleware([
+    RetryMiddleware::class => ['tries' => 3, 'sleep' => 2000],
+])]
+```
+
+miniCLI maps config keys to constructor parameters and can inject service dependencies.
+
+## Execution behavior
+
+- Middleware runs as a pipeline around command execution.
+- Middleware can short-circuit by returning an `ExitCode` without calling `$next(...)`.
+
+## Design tip
+
+Use middleware for cross-cutting concerns only: auth checks, retries, audit trails, tracing.
+
+## Checkpoint
+
+Before moving on, confirm:
+
+- You can explain why logging in middleware is better than copying it into each command.
+- You know where to place command-specific vs global middleware.
+
+## Next lesson
+
+Move shared infrastructure into [Services and Config](/docs/services-and-config/).

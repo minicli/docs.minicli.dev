@@ -1,0 +1,80 @@
+---
+title: Command Model
+description: Understand how miniCLI discovers commands, subcommands, and defaults.
+sidebar:
+  order: 4
+---
+
+This lesson teaches the structure miniCLI expects so your CLI remains predictable as it grows.
+
+## Lesson Goal
+
+Understand how classes and methods map to executable command paths.
+
+## Discovery rules
+
+miniCLI discovers commands by scanning configured command paths for classes that:
+
+- Extend `Minicli\Console\ConsoleCommand`
+- Include a class-level `#[Command]` attribute
+
+## Naming behavior
+
+You can set explicit names:
+
+```php
+#[Command(name: 'users', description: 'User operations')]
+```
+
+If you skip `name`, miniCLI derives one from the class/method name.
+
+## Subcommands
+
+Subcommands are public methods with `#[Command]` inside a command class:
+
+```php
+#[Command(name: 'users', description: 'User operations')]
+final class UsersCommand extends ConsoleCommand
+{
+    #[Command(description: 'List users')]
+    public function list(): ExitCode
+    {
+        return ExitCode::Success;
+    }
+}
+```
+
+Invocation:
+
+```bash
+./minicli users list
+```
+
+## Default subcommand resolution
+
+When a parent command is called without subcommand, miniCLI resolves defaults in this order:
+
+1. A public `default()` method
+2. A method with `#[DefaultCommand]`
+3. A method with `#[Command(default: true)]`
+
+If none exists, miniCLI returns invalid exit code and shows available subcommands.
+
+## Design tip
+
+Keep parent commands as namespaces and push behavior into focused subcommands. This keeps help output and command ownership clear.
+
+## Checkpoint
+
+Before moving on, confirm:
+
+- You can explain what `./minicli users list` resolves to.
+- You can explain what happens when `./minicli users` is called with no default.
+
+## Next lesson
+
+Add user input contracts with [Arguments and Flags](/docs/arguments-and-flags/).
+
+## Explore instead
+
+If you want the full architectural map, continue in [Architecture Concepts](/docs/architecture-concepts/).

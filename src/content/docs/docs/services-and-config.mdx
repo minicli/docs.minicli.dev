@@ -1,0 +1,69 @@
+---
+title: Services and Config
+description: Organize application state with typed config and reusable services.
+sidebar:
+  order: 7
+---
+
+As your CLI grows, commands should orchestrate behavior, not own all infrastructure details.
+
+## Lesson Goal
+
+Use config classes and service classes to keep command logic focused.
+
+## Config classes
+
+Create config classes in `config/*.php` with `#[Config('name')]`:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Minicli\Attributes\Config;
+
+#[Config('app')]
+final readonly class AppConfig
+{
+    public function __construct(
+        public string $name = 'My CLI',
+        public array $commandPaths = [__DIR__ . '/../app/Commands'],
+        public bool $debug = true,
+    ) {}
+}
+```
+
+Read config inside commands:
+
+```php
+$appConfig = $this->config('app');
+```
+
+## Services
+
+Create services in `app/Services` with `#[Service('key')]`:
+
+```php
+#[Service('notifier')]
+final class Notifier implements ServiceInterface
+{
+    public function load(App $app): void {}
+}
+```
+
+Services are resolved from the app container and can be used across commands and middleware.
+
+## Design tip
+
+If something is reused by multiple commands, move it to a service. If something sets runtime behavior, keep it in config.
+
+## Checkpoint
+
+Before moving on, confirm:
+
+- You can explain the difference between command parameters and config.
+- You know which dependencies in your command should become services.
+
+## Next lesson
+
+Learn how to present information cleanly with [Components and Output](/docs/components-and-output/).

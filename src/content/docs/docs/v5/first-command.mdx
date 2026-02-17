@@ -1,0 +1,44 @@
+---
+title: Your First Command
+description: Create and run an attribute-based command.
+sidebar:
+  order: 2
+---
+
+Create `app/Commands/HelloCommand.php`:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Commands;
+
+use Minicli\Attributes\Command;
+use Minicli\Components\Text;
+use Minicli\Console\ConsoleCommand;
+use Minicli\Console\ExitCode;
+
+#[Command(name: 'hello', description: 'Say hello')]
+final class HelloCommand extends ConsoleCommand
+{
+    public function __invoke(): ExitCode
+    {
+        Text::make('Hello from miniCLI 5.x')->success()->bold()->render();
+
+        return ExitCode::Success;
+    }
+}
+```
+
+Run it:
+
+```bash
+./minicli hello
+```
+
+## Key Rules
+
+- Commands extend `ConsoleCommand`.
+- Commands are registered through `#[Command]` attributes.
+- Command handlers return `ExitCode`.

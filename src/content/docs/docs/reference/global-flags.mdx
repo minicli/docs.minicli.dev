@@ -1,0 +1,24 @@
+---
+title: Global Flags
+description: Built-in flags available for all miniCLI commands.
+sidebar:
+  order: 3
+---
+
+Global flags are available regardless of which command you run.
+
+## `--help`
+
+Displays help for the resolved command, including arguments and defaults.
+
+## `--quiet`
+
+Suppresses component output for the current command execution.
+
+## `--profile`
+
+Appends a profile table with command name, exit code, elapsed time, memory delta, and peak memory.
+
+## Practical pattern
+
+Use `--quiet` and `--profile` together when tuning commands for CI/runtime usage.

@@ -1,0 +1,27 @@
+---
+title: Architecture Concepts
+description: Understand the core ideas that keep a miniCLI app maintainable as it grows.
+---
+
+This section explains the architectural model behind miniCLI. If you understand these concepts first, implementation details become easier to reason about.
+
+## How to read this section
+
+Follow these pages in order for a coherent mental model:
+
+1. [Command Model](/docs/command-model/)
+2. [Arguments and Flags](/docs/arguments-and-flags/)
+3. [Middleware](/docs/middleware/)
+4. [Services and Config](/docs/services-and-config/)
+
+## What you should learn here
+
+- How command paths are discovered and resolved.
+- How input contracts map from CLI syntax to typed PHP method signatures.
+- How middleware wraps command execution for cross-cutting concerns.
+- How services and config keep command classes focused and explicit.
+
+## Explore from here
+
+- Want output patterns and operator UX? Go to [Digging Deeper](/docs/digging-deeper/).
+- Need exact APIs while reading? Open [Reference Overview](/docs/reference/).

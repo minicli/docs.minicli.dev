@@ -1,0 +1,39 @@
+---
+title: Middleware
+description: Add execution pipeline behavior around commands.
+sidebar:
+  order: 5
+---
+
+Apply middleware at class or method level with `#[Middleware]`.
+
+## Basic Middleware
+
+```php
+#[Middleware([AuditMiddleware::class])]
+#[Command(name: 'sync', description: 'Sync resources')]
+final class SyncCommand extends ConsoleCommand
+{
+    public function __invoke(): ExitCode
+    {
+        return ExitCode::Success;
+    }
+}
+```
+
+Middleware must implement `Minicli\Contracts\MiddlewareInterface`.
+
+## Configured Middleware
+
+```php
+#[Middleware([
+    RetryMiddleware::class => ['tries' => 3, 'sleep' => 2000],
+])]
+```
+
+miniCLI maps config keys to middleware constructor parameters and can inject service dependencies.
+
+## Behavior
+
+- Middleware runs as a pipeline around command execution.
+- Middleware can short-circuit by returning an `ExitCode` without calling `$next(...)`.

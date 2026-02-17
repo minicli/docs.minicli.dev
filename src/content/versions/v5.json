@@ -1,0 +1,32 @@
+{
+  "sidebar": [
+    {
+      "label": "Start Here",
+      "items": [
+        { "label": "Getting Started", "slug": "getting-started" },
+        { "label": "Your First Command", "slug": "first-command" },
+        { "label": "Command Model", "slug": "command-model" }
+      ]
+    },
+    {
+      "label": "Guides",
+      "items": [
+        { "label": "Arguments and Flags", "slug": "arguments-and-flags" },
+        { "label": "Middleware", "slug": "middleware" },
+        { "label": "Services and Config", "slug": "services-and-config" },
+        { "label": "Components and Output", "slug": "components-and-output" },
+        { "label": "Built-in Commands", "slug": "built-in-commands" },
+        { "label": "Versioning", "slug": "versioning" }
+      ]
+    },
+    {
+      "label": "Reference",
+      "items": [
+        { "label": "Attributes", "slug": "reference/attributes" },
+        { "label": "Exit Codes", "slug": "reference/exit-codes" },
+        { "label": "Global Flags", "slug": "reference/global-flags" },
+        { "label": "Input Syntax", "slug": "reference/input-syntax" }
+      ]
+    }
+  ]
+}

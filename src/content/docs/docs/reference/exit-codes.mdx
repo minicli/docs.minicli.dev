@@ -1,0 +1,26 @@
+---
+title: Exit Codes
+description: Command return values and their meaning in miniCLI.
+sidebar:
+  order: 2
+---
+
+Commands return `Minicli\Console\ExitCode` so results are script-safe and explicit.
+
+## Enum values
+
+- `ExitCode::Success` => `0`
+- `ExitCode::Failure` => `1`
+- `ExitCode::Invalid` => `2`
+
+## Typical usage
+
+```php
+return ExitCode::Success;
+```
+
+## How to think about exit codes
+
+- Use `Success` for completed command intent.
+- Use `Failure` for operational or business errors.
+- Use `Invalid` for wrong invocation, unknown command path, or missing required input.

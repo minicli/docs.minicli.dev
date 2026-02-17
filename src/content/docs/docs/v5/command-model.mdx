@@ -1,0 +1,55 @@
+---
+title: Command Model
+description: How miniCLI discovers commands and resolves subcommands.
+sidebar:
+  order: 3
+---
+
+## Discovery
+
+miniCLI discovers commands by scanning command paths and reading classes that:
+
+- Extend `Minicli\Console\ConsoleCommand`
+- Include a class-level `#[Command]` attribute
+
+## Naming
+
+You can explicitly set a name:
+
+```php
+#[Command(name: 'users', description: 'User operations')]
+```
+
+If omitted, miniCLI derives a kebab-case name from the class/method.
+
+## Subcommands
+
+A command class can expose subcommands as public methods with `#[Command]`:
+
+```php
+#[Command(name: 'users', description: 'User operations')]
+final class UsersCommand extends ConsoleCommand
+{
+    #[Command(description: 'List users')]
+    public function list(): ExitCode
+    {
+        return ExitCode::Success;
+    }
+}
+```
+
+Invoke with:
+
+```bash
+./minicli users list
+```
+
+## Default Subcommand Resolution
+
+When the parent command is called without a subcommand, miniCLI resolves defaults in this order:
+
+1. A public `default()` method
+2. A method with `#[DefaultCommand]`
+3. A method with `#[Command(default: true)]`
+
+If no default exists, miniCLI returns an invalid exit code and shows available subcommands.

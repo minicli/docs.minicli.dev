@@ -1,0 +1,52 @@
+---
+title: Components and Output
+description: Render styled output and interactive input in a consistent way.
+sidebar:
+  order: 7
+---
+
+miniCLI provides component-based output and input primitives.
+
+## Output Components
+
+Common components:
+
+- `Text`
+- `Alert`
+- `Divider`
+- `Table`
+- `List\ItemList`
+- `ProgressBar`
+
+Example:
+
+```php
+use Minicli\Components\Alert;
+use Minicli\Components\Text;
+
+Text::make('Deploy started')->info()->bold()->render();
+Alert::make('Using production credentials')->warning()->render();
+```
+
+## Input Components
+
+Interactive input components:
+
+- `Question`
+- `Password`
+- `Confirm`
+- `Select`
+- `MultiSelect`
+- `Number`
+
+Example:
+
+```php
+$env = Select::make('Select environment')
+    ->options(['dev' => 'Development', 'prod' => 'Production'])
+    ->ask();
+```
+
+## Quiet Mode
+
+When `--quiet` is passed, component rendering is suppressed.

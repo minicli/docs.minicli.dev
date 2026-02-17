@@ -1,0 +1,78 @@
+---
+title: Components and Output
+description: Build readable, interactive terminal UX with miniCLI components.
+sidebar:
+  order: 8
+---
+
+Good CLI UX is not just about logic, it is about clarity under pressure.
+
+## Lesson Goal
+
+Use components to make command output and input clear, consistent, and maintainable.
+
+## Output components
+
+Common output components:
+
+- `Text`
+- `Alert`
+- `Divider`
+- `Table`
+- `List\\ItemList`
+- `ProgressBar`
+
+Example:
+
+```php
+use Minicli\Components\Alert;
+use Minicli\Components\Text;
+
+Text::make('Deploy started')->info()->bold()->render();
+Alert::make('Using production credentials')->warning()->render();
+```
+
+## Input components
+
+Interactive input components:
+
+- `Question`
+- `Password`
+- `Confirm`
+- `Select`
+- `MultiSelect`
+- `Number`
+
+Example:
+
+```php
+$env = Select::make('Select environment')
+    ->options(['dev' => 'Development', 'prod' => 'Production'])
+    ->ask();
+```
+
+## Quiet mode behavior
+
+When `--quiet` is passed, component rendering is suppressed.
+
+This is important when your CLI runs in automation contexts.
+
+## Design tip
+
+Treat output as a contract:
+
+- Humans need clarity.
+- Automation needs consistency.
+
+Use style and structure intentionally.
+
+## Checkpoint
+
+Before moving on, confirm:
+
+- You can choose the right output component for status vs warnings.
+- You can explain why `--quiet` matters in CI pipelines.
+
+## Next lesson
+
+Learn your runtime toolbox in [Built-in Commands](/docs/built-in-commands/).

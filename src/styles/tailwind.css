@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@source "../**/*.{astro,js,jsx,ts,tsx,md,mdx}";
+
+@theme {
+  --color-accent-input: #7d6cff;
+  --color-accent-output: #ff5f9f;
+  --color-accent-config: #34b06f;
+}

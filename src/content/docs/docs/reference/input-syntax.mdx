@@ -1,0 +1,40 @@
+---
+title: Input Syntax
+description: Command invocation syntax used by the miniCLI 5.x branch.
+sidebar:
+  order: 4
+---
+
+miniCLI input syntax is intentionally compact and explicit.
+
+## Positional resolution
+
+```bash
+./minicli <command> [subcommand]
+```
+
+## Named parameters
+
+Use `key=value` for method parameters.
+
+```bash
+./minicli users create name=erika role=admin
+```
+
+## Flags
+
+Boolean and global flags use `--flag` form.
+
+```bash
+./minicli users create --notify --profile
+```
+
+## Notes
+
+- Parameter names map to kebab-case method parameter names unless overridden with `#[Argument(name: ...)]`.
+- Unknown command names raise `CommandNotFoundException`.
+
+## Related lessons
+
+- [Command Model](/docs/command-model/)
+- [Arguments and Flags](/docs/arguments-and-flags/)

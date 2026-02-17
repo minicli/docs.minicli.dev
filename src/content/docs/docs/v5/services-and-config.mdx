@@ -1,0 +1,50 @@
+---
+title: Services and Config
+description: Register application services and typed config classes.
+sidebar:
+  order: 6
+---
+
+miniCLI 5.x loads config and services through attributes.
+
+## Config Classes
+
+Create config classes in `config/*.php` and annotate with `#[Config('name')]`.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Minicli\Attributes\Config;
+
+#[Config('app')]
+final readonly class AppConfig
+{
+    public function __construct(
+        public string $name = 'My CLI',
+        public array $commandPaths = [__DIR__ . '/../app/Commands'],
+        public bool $debug = true,
+    ) {}
+}
+```
+
+Read config in commands:
+
+```php
+$appConfig = $this->config('app');
+```
+
+## Services
+
+Create services in `app/Services` and annotate with `#[Service('key')]`.
+
+```php
+#[Service('notifier')]
+final class Notifier implements ServiceInterface
+{
+    public function load(App $app): void {}
+}
+```
+
+Services can be resolved from the app container.

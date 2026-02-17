@@ -1,0 +1,52 @@
+---
+title: Why miniCLI
+description: Understand when miniCLI is the right fit and what mindset it encourages.
+sidebar:
+  order: 1
+---
+
+miniCLI is built for teams that treat command-line tools like real products, not throwaway scripts.
+
+## Why teams choose miniCLI
+
+miniCLI gives you a strong structure without forcing a heavy runtime stack:
+
+- Attribute-based command discovery and registration.
+- Clear command lifecycle with middleware around execution.
+- Built-in components for polished terminal UX.
+- Config and service loading patterns that scale with your project.
+
+## When miniCLI is a strong fit
+
+Use miniCLI when you are building:
+
+- Internal platform tooling.
+- Deployment or release automation.
+- Operational command suites used by multiple teammates.
+- CLIs that need readable output and maintainable architecture.
+
+## The mindset
+
+Think in three layers:
+
+1. `Command`: what the user asks for.
+2. `Pipeline`: middleware and shared behavior around execution.
+3. `Infrastructure`: config and services that commands depend on.
+
+If you keep these layers separate, your CLI stays readable as it grows.
+
+## What you should learn first
+
+To get value quickly, follow the docs in this order:
+
+1. [Getting Started](/docs/getting-started/)
+2. [Your First Command](/docs/first-command/)
+3. [Command Model](/docs/command-model/)
+
+## Next lesson
+
+Move to [Getting Started](/docs/getting-started/) and scaffold a real app.
+
+## Explore instead
+
+If you prefer concept-first reading, jump to [Architecture Concepts](/docs/architecture-concepts/).

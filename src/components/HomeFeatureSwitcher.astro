@@ -1,0 +1,131 @@
+---
+import { Code } from '@astrojs/starlight/components';
+
+const typedCode = `<?php
+
+#[Command(name: 'release')]
+class ReleaseCommand extends ConsoleCommand
+{
+    #[Argument]
+    public string $env = 'staging';
+
+    #[Config]
+    public DeployConfig $config;
+
+    public function handle(): int
+    {
+        Text::make('Deploying env')->info()->render();
+        return ExitCode::OK;
+    }
+}`;
+
+const outputCode = `<?php
+
+#[Command(name: 'release')]
+class ReleaseCommand extends ConsoleCommand
+{
+    public function handle(): int
+    {
+        Alert::make('Starting release')->info()->render();
+        Text::make('Environment: prod')->bold()->render();
+        Table::fromArray($steps)->render();
+        Alert::make('Release complete')->success()->render();
+
+        return ExitCode::OK;
+    }
+}`;
+
+const configCode = `<?php
+
+#[Config]
+class DeployConfig
+{
+    public string $defaultEnv = 'staging';
+    public bool $safeMode = true;
+}
+
+#[Service]
+class DeployService implements ServiceInterface
+{
+    public function boot(App $app): void
+    {
+        // register dependencies once for all commands
+    }
+}`;
+
+const cardBase =
+  'w-full rounded-[0.88rem] border border-[var(--mc-border)] bg-[var(--mc-bg-elev)] p-3.5 text-left text-inherit transition-[border-color,transform,background-color] duration-200 hover:-translate-y-px hover:border-[var(--mc-border-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-input aria-[pressed=true]:border-accent-input/35 aria-[pressed=true]:bg-linear-to-br aria-[pressed=true]:from-accent-input/10 aria-[pressed=true]:to-accent-config/10';
+---
+
+<section class="grid gap-4 pt-8 min-[58rem]:grid-cols-[1.22fr_1fr]" data-feature-switcher aria-label="Framework preview">
+  <article class="rounded-2xl border border-[var(--mc-border)] bg-[var(--mc-surface)] shadow-[var(--mc-shadow)] backdrop-blur-[12px]" data-code-switcher>
+    <div class="flex items-center justify-between gap-3 border-b border-[var(--mc-border)] px-4 py-3 text-sm font-bold text-[var(--mc-muted)]">
+      <span id="mc-code-title">Command Definition</span>
+      <span class="inline-flex gap-1.5" aria-hidden="true">
+        <span class="h-2.5 w-2.5 rounded-full bg-accent-input"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-accent-output"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-accent-config"></span>
+      </span>
+    </div>
+
+    <div class="p-3 [&_.expressive-code]:m-0 [&_.expressive-code]:shadow-none [&_.expressive-code_pre]:rounded-xl [&_.expressive-code_pre]:border-0 [&_.ec-line]:text-[0.86rem]" data-code-panel="typed" aria-labelledby="mc-code-title">
+      <Code lang="php" code={typedCode} />
+    </div>
+    <div class="p-3 [&_.expressive-code]:m-0 [&_.expressive-code]:shadow-none [&_.expressive-code_pre]:rounded-xl [&_.expressive-code_pre]:border-0 [&_.ec-line]:text-[0.86rem]" data-code-panel="output" hidden aria-labelledby="mc-code-title">
+      <Code lang="php" code={outputCode} />
+    </div>
+    <div class="p-3 [&_.expressive-code]:m-0 [&_.expressive-code]:shadow-none [&_.expressive-code_pre]:rounded-xl [&_.expressive-code_pre]:border-0 [&_.ec-line]:text-[0.86rem]" data-code-panel="config" hidden aria-labelledby="mc-code-title">
+      <Code lang="php" code={configCode} />
+    </div>
+  </article>
+
+  <aside class="grid gap-3" aria-label="Highlights">
+    <button class={cardBase} type="button" data-code-trigger="typed" aria-pressed="true">
+      <span class="mb-2 inline-flex rounded-full border border-[var(--mc-border)] px-2 py-1 text-xs font-bold text-accent-input">Input</span>
+      <h3 class="text-base tracking-[-0.01em]">Typed and explicit</h3>
+      <p class="mt-2 text-sm leading-6 text-[var(--mc-muted)]">Arguments and flags are defined where behavior lives, keeping command contracts obvious.</p>
+    </button>
+    <button class={cardBase} type="button" data-code-trigger="output" aria-pressed="false">
+      <span class="mb-2 inline-flex rounded-full border border-[var(--mc-border)] px-2 py-1 text-xs font-bold text-accent-output">Output</span>
+      <h3 class="text-base tracking-[-0.01em]">Readable by default</h3>
+      <p class="mt-2 text-sm leading-6 text-[var(--mc-muted)]">Ship polished terminal output with components for alerts, tables, prompts, and progress.</p>
+    </button>
+    <button class={cardBase} type="button" data-code-trigger="config" aria-pressed="false">
+      <span class="mb-2 inline-flex rounded-full border border-[var(--mc-border)] px-2 py-1 text-xs font-bold text-accent-config">Config</span>
+      <h3 class="text-base tracking-[-0.01em]">Composable internals</h3>
+      <p class="mt-2 text-sm leading-6 text-[var(--mc-muted)]">Organize services, middleware, and configuration as your CLI grows without entropy.</p>
+    </button>
+  </aside>
+</section>
+
+<script>
+  const switchers = document.querySelectorAll('[data-feature-switcher] [data-code-switcher]');
+
+  for (const switcher of switchers) {
+    const panels = switcher.querySelectorAll('[data-code-panel]');
+    const scope = switcher.closest('[data-feature-switcher]') ?? document;
+    const triggers = scope.querySelectorAll('[data-code-trigger]');
+
+    const setActive = (id) => {
+      for (const panel of panels) {
+        panel.hidden = panel.getAttribute('data-code-panel') !== id;
+      }
+
+      for (const trigger of triggers) {
+        const isActive = trigger.getAttribute('data-code-trigger') === id;
+        trigger.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      }
+    };
+
+    for (const trigger of triggers) {
+      trigger.addEventListener('click', () => {
+        const id = trigger.getAttribute('data-code-trigger');
+        if (!id) return;
+        setActive(id);
+      });
+    }
+
+    const first = triggers[0]?.getAttribute('data-code-trigger');
+    if (first) setActive(first);
+  }
+</script>

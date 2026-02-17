@@ -1,0 +1,33 @@
+---
+title: Input Syntax
+description: Command invocation syntax used by the current 5.x branch.
+sidebar:
+  order: 4
+---
+
+## Positional Resolution
+
+```bash
+./minicli <command> [subcommand]
+```
+
+## Named Parameters
+
+Use `key=value` pairs for method parameters.
+
+```bash
+./minicli users create name=erika role=admin
+```
+
+## Flags
+
+Boolean and global flags use `--flag` form.
+
+```bash
+./minicli users create --notify --profile
+```
+
+## Notes
+
+- Parameter names map to kebab-case method parameter names unless overridden via `#[Argument(name: ...)]`.
+- Unknown command names raise `CommandNotFoundException`.

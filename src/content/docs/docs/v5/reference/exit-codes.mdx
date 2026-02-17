@@ -1,0 +1,20 @@
+---
+title: Exit Codes
+description: Command return values in miniCLI 5.x.
+sidebar:
+  order: 2
+---
+
+Commands return `Minicli\Console\ExitCode`.
+
+Enum values:
+
+- `ExitCode::Success` => `0`
+- `ExitCode::Failure` => `1`
+- `ExitCode::Invalid` => `2`
+
+Example:
+
+```php
+return ExitCode::Success;
+```
