@@ -1,7 +1,22 @@
 ---
 import { Code } from '@astrojs/starlight/components';
 
-const typedCode = `<?php
+/**
+ * Feature IDs for the code switcher
+ */
+const FEATURES = {
+  TYPED: 'typed',
+  OUTPUT: 'output',
+  CONFIG: 'config',
+} as const;
+
+type FeatureId = typeof FEATURES[keyof typeof FEATURES];
+
+/**
+ * Code samples for each feature
+ */
+const CODE_SAMPLES: Record<FeatureId, string> = {
+  [FEATURES.TYPED]: `<?php
 
 #[Command(name: 'release')]
 class ReleaseCommand extends ConsoleCommand
@@ -17,9 +32,9 @@ class ReleaseCommand extends ConsoleCommand
         Text::make('Deploying env')->info()->render();
         return ExitCode::OK;
     }
-}`;
+}`,
 
-const outputCode = `<?php
+  [FEATURES.OUTPUT]: `<?php
 
 #[Command(name: 'release')]
 class ReleaseCommand extends ConsoleCommand
@@ -33,9 +48,9 @@ class ReleaseCommand extends ConsoleCommand
 
         return ExitCode::OK;
     }
-}`;
+}`,
 
-const configCode = `<?php
+  [FEATURES.CONFIG]: `<?php
 
 #[Config]
 class DeployConfig
@@ -51,15 +66,65 @@ class DeployService implements ServiceInterface
     {
         // register dependencies once for all commands
     }
-}`;
+}`,
+};
 
-const cardBase =
-  'w-full rounded-[0.88rem] border border-[var(--mc-border)] bg-[var(--mc-bg-elev)] p-3.5 text-left text-inherit transition-[border-color,transform,background-color] duration-200 hover:-translate-y-px hover:border-[var(--mc-border-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-input aria-[pressed=true]:border-accent-input/35 aria-[pressed=true]:bg-linear-to-br aria-[pressed=true]:from-accent-input/10 aria-[pressed=true]:to-accent-config/10';
+/**
+ * Feature card configuration
+ */
+interface FeatureCard {
+  id: FeatureId;
+  badge: string;
+  accentColor: string;
+  title: string;
+  description: string;
+}
+
+const FEATURE_CARDS: FeatureCard[] = [
+  {
+    id: FEATURES.TYPED,
+    badge: 'Input',
+    accentColor: 'accent-input',
+    title: 'Typed and explicit',
+    description: 'Arguments and flags are defined where behavior lives, keeping command contracts obvious.',
+  },
+  {
+    id: FEATURES.OUTPUT,
+    badge: 'Output',
+    accentColor: 'accent-output',
+    title: 'Readable by default',
+    description: 'Ship polished terminal output with components for alerts, tables, prompts, and progress.',
+  },
+  {
+    id: FEATURES.CONFIG,
+    badge: 'Config',
+    accentColor: 'accent-config',
+    title: 'Composable internals',
+    description: 'Organize services, middleware, and configuration as your CLI grows without entropy.',
+  },
+];
+
+/**
+ * Shared style classes
+ */
+const STYLES = {
+  card: 'w-full rounded-[0.88rem] border border-[var(--mc-border)] bg-[var(--mc-bg-elev)] p-3.5 text-left text-inherit transition-[border-color,transform,background-color] duration-200 hover:-translate-y-px hover:border-[var(--mc-border-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-input aria-[pressed=true]:border-accent-input/35 aria-[pressed=true]:bg-linear-to-br aria-[pressed=true]:from-accent-input/10 aria-[pressed=true]:to-accent-config/10',
+  codePanel: 'p-3 [&_.expressive-code]:m-0 [&_.expressive-code]:shadow-none [&_.expressive-code_pre]:rounded-xl [&_.expressive-code_pre]:border-0 [&_.ec-line]:text-[0.86rem]',
+  badge: 'mb-2 inline-flex rounded-full border border-[var(--mc-border)] px-2 py-1 text-xs font-bold',
+};
 ---
 
-<section class="grid gap-4 pt-8 min-[58rem]:grid-cols-[1.22fr_1fr]" data-feature-switcher aria-label="Framework preview">
-  <article class="rounded-2xl border border-[var(--mc-border)] bg-[var(--mc-surface)] shadow-[var(--mc-shadow)] backdrop-blur-[12px]" data-code-switcher>
-    <div class="flex items-center justify-between gap-3 border-b border-[var(--mc-border)] px-4 py-3 text-sm font-bold text-[var(--mc-muted)]">
+<section 
+  class="grid gap-4 pt-8 min-[58rem]:grid-cols-[1.22fr_1fr]" 
+  data-feature-switcher 
+  aria-label="Framework preview"
+>
+  <!-- Code Display Panel -->
+  <article 
+    class="rounded-2xl border border-(--mc-border) bg-(--mc-surface)ow-[var(--mc-shadow)] backdrop-blur-md"
+    data-code-switcher
+  >
+    <div class="flex items-center justify-between gap-3 border-b border-(--mc-border) px-4 py-3 text-sm font-bold text-(--mc-muted)">
       <span id="mc-code-title">Command Definition</span>
       <span class="inline-flex gap-1.5" aria-hidden="true">
         <span class="h-2.5 w-2.5 rounded-full bg-accent-input"></span>
@@ -68,64 +133,97 @@ const cardBase =
       </span>
     </div>
 
-    <div class="p-3 [&_.expressive-code]:m-0 [&_.expressive-code]:shadow-none [&_.expressive-code_pre]:rounded-xl [&_.expressive-code_pre]:border-0 [&_.ec-line]:text-[0.86rem]" data-code-panel="typed" aria-labelledby="mc-code-title">
-      <Code lang="php" code={typedCode} />
-    </div>
-    <div class="p-3 [&_.expressive-code]:m-0 [&_.expressive-code]:shadow-none [&_.expressive-code_pre]:rounded-xl [&_.expressive-code_pre]:border-0 [&_.ec-line]:text-[0.86rem]" data-code-panel="output" hidden aria-labelledby="mc-code-title">
-      <Code lang="php" code={outputCode} />
-    </div>
-    <div class="p-3 [&_.expressive-code]:m-0 [&_.expressive-code]:shadow-none [&_.expressive-code_pre]:rounded-xl [&_.expressive-code_pre]:border-0 [&_.ec-line]:text-[0.86rem]" data-code-panel="config" hidden aria-labelledby="mc-code-title">
-      <Code lang="php" code={configCode} />
-    </div>
+    {Object.entries(CODE_SAMPLES).map(([id, code], index) => (
+      <div 
+        class={STYLES.codePanel}
+        data-code-panel={id}
+        hidden={index !== 0}
+        aria-labelledby="mc-code-title"
+      >
+        <Code lang="php" code={code} />
+      </div>
+    ))}
   </article>
 
+  <!-- Feature Selection Cards -->
   <aside class="grid gap-3" aria-label="Highlights">
-    <button class={cardBase} type="button" data-code-trigger="typed" aria-pressed="true">
-      <span class="mb-2 inline-flex rounded-full border border-[var(--mc-border)] px-2 py-1 text-xs font-bold text-accent-input">Input</span>
-      <h3 class="text-base tracking-[-0.01em]">Typed and explicit</h3>
-      <p class="mt-2 text-sm leading-6 text-[var(--mc-muted)]">Arguments and flags are defined where behavior lives, keeping command contracts obvious.</p>
-    </button>
-    <button class={cardBase} type="button" data-code-trigger="output" aria-pressed="false">
-      <span class="mb-2 inline-flex rounded-full border border-[var(--mc-border)] px-2 py-1 text-xs font-bold text-accent-output">Output</span>
-      <h3 class="text-base tracking-[-0.01em]">Readable by default</h3>
-      <p class="mt-2 text-sm leading-6 text-[var(--mc-muted)]">Ship polished terminal output with components for alerts, tables, prompts, and progress.</p>
-    </button>
-    <button class={cardBase} type="button" data-code-trigger="config" aria-pressed="false">
-      <span class="mb-2 inline-flex rounded-full border border-[var(--mc-border)] px-2 py-1 text-xs font-bold text-accent-config">Config</span>
-      <h3 class="text-base tracking-[-0.01em]">Composable internals</h3>
-      <p class="mt-2 text-sm leading-6 text-[var(--mc-muted)]">Organize services, middleware, and configuration as your CLI grows without entropy.</p>
-    </button>
+    {FEATURE_CARDS.map((feature, index) => (
+      <button 
+        class={STYLES.card}
+        type="button" 
+        data-code-trigger={feature.id}
+        aria-pressed={index === 0 ? 'true' : 'false'}
+      >
+        <span class={`${STYLES.badge} text-${feature.accentColor}`}>
+          {feature.badge}
+        </span>
+        <h3 class="text-base tracking-[-0.01em]">
+          {feature.title}
+        </h3>
+        <p class="mt-2 text-sm leading-6 text-(--mc-muted)">
+          {feature.description}
+        </p>
+      </button>
+    ))}
   </aside>
 </section>
 
 <script>
-  const switchers = document.querySelectorAll('[data-feature-switcher] [data-code-switcher]');
+  /**
+   * Initialize feature switcher functionality
+   * Handles switching between different code examples when feature cards are clicked
+   */
+  function initFeatureSwitcher() {
+    const switchers = document.querySelectorAll<HTMLElement>('[data-feature-switcher] [data-code-switcher]');
 
-  for (const switcher of switchers) {
-    const panels = switcher.querySelectorAll('[data-code-panel]');
-    const scope = switcher.closest('[data-feature-switcher]') ?? document;
-    const triggers = scope.querySelectorAll('[data-code-trigger]');
+    switchers.forEach((switcher) => {
+      const panels = switcher.querySelectorAll<HTMLElement>('[data-code-panel]');
+      const scope = switcher.closest('[data-feature-switcher]') ?? document;
+      const triggers = scope.querySelectorAll<HTMLButtonElement>('[data-code-trigger]');
 
-    const setActive = (id) => {
-      for (const panel of panels) {
-        panel.hidden = panel.getAttribute('data-code-panel') !== id;
+      if (panels.length === 0 || triggers.length === 0) {
+        console.warn('Feature switcher: missing panels or triggers');
+        return;
       }
 
-      for (const trigger of triggers) {
-        const isActive = trigger.getAttribute('data-code-trigger') === id;
-        trigger.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      }
-    };
+      /**
+       * Activate a specific feature by its ID
+       */
+      const activateFeature = (featureId: string) => {
+        // Update panels visibility
+        panels.forEach((panel) => {
+          const isActive = panel.dataset.codePanel === featureId;
+          panel.hidden = !isActive;
+        });
 
-    for (const trigger of triggers) {
-      trigger.addEventListener('click', () => {
-        const id = trigger.getAttribute('data-code-trigger');
-        if (!id) return;
-        setActive(id);
+        // Update trigger states
+        triggers.forEach((trigger) => {
+          const isActive = trigger.dataset.codeTrigger === featureId;
+          trigger.setAttribute('aria-pressed', String(isActive));
+        });
+      };
+
+      // Attach click handlers to triggers
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const featureId = trigger.dataset.codeTrigger;
+          if (featureId) {
+            activateFeature(featureId);
+          }
+        });
       });
-    }
 
-    const first = triggers[0]?.getAttribute('data-code-trigger');
-    if (first) setActive(first);
+      // Initialize with first trigger
+      const firstFeatureId = triggers[0]?.dataset.codeTrigger;
+      if (firstFeatureId) {
+        activateFeature(firstFeatureId);
+      }
+    });
   }
+
+  // Initialize on page load
+  initFeatureSwitcher();
+
+  // Re-initialize after view transitions (Astro's default navigation)
+  document.addEventListener('astro:page-load', initFeatureSwitcher);
 </script>
