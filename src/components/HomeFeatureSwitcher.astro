@@ -86,21 +86,21 @@ const FEATURE_CARDS: FeatureCard[] = [
     badge: 'Input',
     accentColor: 'accent-input',
     title: 'Typed and explicit',
-    description: 'Arguments and flags are defined where behavior lives, keeping command contracts obvious.',
+    description: 'Define command contracts once and make invocation behavior predictable for humans and automation.',
   },
   {
     id: FEATURES.OUTPUT,
     badge: 'Output',
     accentColor: 'accent-output',
     title: 'Readable by default',
-    description: 'Ship polished terminal output with components for alerts, tables, prompts, and progress.',
+    description: 'Give operators clean, scannable terminal interfaces with first-class output and prompt components.',
   },
   {
     id: FEATURES.CONFIG,
     badge: 'Config',
     accentColor: 'accent-config',
     title: 'Composable internals',
-    description: 'Organize services, middleware, and configuration as your CLI grows without entropy.',
+    description: 'Scale command suites with clear boundaries between business logic, middleware, services, and config.',
   },
 ];
 
@@ -121,7 +121,7 @@ const STYLES = {
 >
   <!-- Code Display Panel -->
   <article 
-    class="rounded-2xl border border-(--mc-border) bg-(--mc-surface)ow-[var(--mc-shadow)] backdrop-blur-md"
+    class="rounded-2xl border border-(--mc-border) bg-(--mc-surface) shadow-(--mc-shadow) backdrop-blur-md"
     data-code-switcher
   >
     <div class="flex items-center justify-between gap-3 border-b border-(--mc-border) px-4 py-3 text-sm font-bold text-(--mc-muted)">
